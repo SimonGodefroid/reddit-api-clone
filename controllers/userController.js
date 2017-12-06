@@ -3,7 +3,9 @@ import db from './../models';
 const userController = {};
 
 userController.post = (req, res) => {
+	console.log('req.body', req.body);
 	const { username, password } = req.body;
+
 	// Validation
 	const user = new db.User({
 		username,
@@ -12,7 +14,10 @@ userController.post = (req, res) => {
 	user
 		.save()
 		.then(newUser => {
-			res.status(200).json({ success: true, message: newUser });
+			res.status(200).json({
+				success: true,
+				message: newUser
+			});
 		})
 		.catch(err => {
 			res.status(500).json({
